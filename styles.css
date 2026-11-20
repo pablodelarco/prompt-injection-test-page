@@ -1,0 +1,2 @@
+/* External stylesheet: hides the .sr-note payload so an inline-style sanitizer can't see it. */
+.sr-note { display: none; }
