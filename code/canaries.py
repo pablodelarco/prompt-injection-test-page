@@ -2,7 +2,7 @@
 import html
 import re
 
-ZW = re.compile(r"[​-‍⁠﻿]")
+ZW = re.compile(r"[\u200b-\u200d\u2060\ufeff]")
 CANARY = re.compile(r"CANARY-7F3A-(\d{2})")
 
 TECHNIQUES = {

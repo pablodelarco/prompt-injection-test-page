@@ -3,7 +3,7 @@ import re
 
 from bs4 import BeautifulSoup, Comment
 
-ZERO_WIDTH = re.compile(r"[​-‍⁠﻿]")
+ZERO_WIDTH = re.compile(r"[\u200b-\u200d\u2060\ufeff]")
 HIDDEN_STYLE = re.compile(
     r"display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*[01]px"
     r"|left\s*:\s*-\d{3,}px|color\s*:\s*(#fff\b|#ffffff|white)",

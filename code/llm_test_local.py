@@ -63,7 +63,7 @@ def undefended(page: str) -> tuple[set[str], bool]:
     )
     calls = msg.get("tool_calls") or []
     seen = found(msg.get("content", "")) | found(json.dumps(calls))
-    return seen, bool(calls)
+    return seen & found(page), bool(calls)  # ignore canaries the model made up
 
 
 def defended(raw_html: str) -> tuple[set[str], str]:
@@ -83,8 +83,8 @@ def defended(raw_html: str) -> tuple[set[str], str]:
     try:
         summary = PageSummary.model_validate_json(text)
     except ValidationError:
-        return found(text), "rejected"
-    return found(summary.model_dump_json()), "valid"
+        return found(text) & found(clean), "rejected"
+    return found(summary.model_dump_json()) & found(clean), "valid"
 
 
 if __name__ == "__main__":
